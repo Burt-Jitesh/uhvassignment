@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal Human Values – Assignment Solution</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ef;
+    --deep: #1a1208;
+    --gold: #c8973a;
+    --gold-light: #e8c46a;
+    --terracotta: #b85c38;
+    --sage: #6b8f6e;
+    --ink: #2c2416;
+    --muted: #8a7d6a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ── DECORATIVE BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 10% 15%, rgba(200,151,58,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 90% 80%, rgba(107,143,110,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 80% 10%, rgba(184,92,56,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-shapes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bg-shapes svg {
+    position: absolute;
+    opacity: 0.04;
+  }
+
+  .shape-1 { top: -80px; right: -60px; width: 420px; }
+  .shape-2 { bottom: 5%; left: -100px; width: 380px; opacity: 0.03 !important; }
+  .shape-3 { top: 40%; right: -40px; width: 200px; opacity: 0.05 !important; }
+  .shape-4 { top: 20%; left: -30px; width: 160px; opacity: 0.04 !important; }
+
+  .watermark {
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 130px;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 50px 80px;
+  }
+
+  /* ── COLLEGE HEADER ── */
+  .college-header {
+    text-align: center;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .college-header::before,
+  .college-header::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    width: 60%;
+    height: 1px;
+    background: var(--gold-light);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .college-header::after {
+    bottom: -10px;
+    width: 30%;
+    opacity: 0.5;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+
+  .logo-icon {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fff8ed, #faf0dc);
+    flex-shrink: 0;
+  }
+
+  .college-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--deep);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .college-sub {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .assignment-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--deep);
+    margin: 16px 0 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    font-size: 13px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+
+  .meta-row span strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── COURSE OUTCOMES ── */
+  .co-box {
+    background: linear-gradient(135deg, #fff9ee, #fdf5e4);
+    border: 1px solid rgba(200,151,58,0.25);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 22px 28px;
+    margin-bottom: 44px;
+  }
+
+  .co-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .co-box ol {
+    padding-left: 18px;
+  }
+
+  .co-box li {
+    font-size: 13.5px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  /* ── UNIT SECTION ── */
+  .unit-section {
+    margin-bottom: 52px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .unit-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  .unit-badge {
+    background: var(--gold);
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .unit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--deep);
+    letter-spacing: 0.3px;
+  }
+
+  .unit-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold-light), transparent);
+  }
+
+  /* ── QUESTION BLOCK ── */
+  .q-block {
+    margin-bottom: 36px;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .q-block::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    opacity: 0.5;
+  }
+
+  .question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17.5px;
+    font-weight: 600;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+
+  .q-num {
+    background: var(--terracotta);
+    color: #fff;
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .co-tag {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--sage);
+    border: 1px solid var(--sage);
+    padding: 1px 8px;
+    border-radius: 20px;
+    margin-left: 8px;
+    vertical-align: middle;
+    opacity: 0.8;
+  }
+
+  .answer {
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.85;
+  }
+
+  .answer p { margin-bottom: 10px; }
+  .answer p:last-child { margin-bottom: 0; }
+
+  .answer strong {
+    color: var(--deep);
+    font-weight: 500;
+  }
+
+  /* Definition / highlight box */
+  .def-box {
+    background: #fff;
+    border: 1px solid rgba(200,151,58,0.2);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+    position: relative;
+  }
+
+  .def-box::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin: 14px 0;
+  }
+
+  .comparison-table th {
+    background: var(--gold);
+    color: #fff;
+    padding: 9px 14px;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .comparison-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(200,151,58,0.15);
+    vertical-align: top;
+  }
+
+  .comparison-table tr:nth-child(even) td {
+    background: rgba(200,151,58,0.04);
+  }
+
+  .answer ul, .answer ol {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+
+  .answer li {
+    margin-bottom: 5px;
+  }
+
+  /* Divider */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+    margin: 48px 0;
+  }
+
+  /* Footer */
+  .doc-footer {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(200,151,58,0.2);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  .doc-footer strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  @media print {
+    body { background: white; }
+    body::before, .bg-shapes, .watermark { display: none; }
+    .page { padding: 30px 30px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background shapes -->
+<div class="bg-shapes">
+  <!-- Large mandala / lotus -->
+  <svg class="shape-1" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="190" stroke="#c8973a" stroke-width="1"/>
+    <circle cx="200" cy="200" r="150" stroke="#c8973a" stroke-width="1"/>
+    <circle cx="200" cy="200" r="110" stroke="#c8973a" stroke-width="1"/>
+    <circle cx="200" cy="200" r="70" stroke="#c8973a" stroke-width="1"/>
+    <line x1="200" y1="10" x2="200" y2="390" stroke="#c8973a" stroke-width="0.8"/>
+    <line x1="10" y1="200" x2="390" y2="200" stroke="#c8973a" stroke-width="0.8"/>
+    <line x1="65" y1="65" x2="335" y2="335" stroke="#c8973a" stroke-width="0.8"/>
+    <line x1="335" y1="65" x2="65" y2="335" stroke="#c8973a" stroke-width="0.8"/>
+    <polygon points="200,30 230,120 320,90 260,170 330,220 240,220 220,320 180,220 90,220 160,170 100,90 190,120" fill="none" stroke="#c8973a" stroke-width="0.8"/>
+  </svg>
+  <!-- Bottom ornament -->
+  <svg class="shape-2" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="180" cy="180" r="170" stroke="#6b8f6e" stroke-width="1.2"/>
+    <circle cx="180" cy="180" r="120" stroke="#6b8f6e" stroke-width="1.2"/>
+    <circle cx="180" cy="180" r="70" stroke="#6b8f6e" stroke-width="1.2"/>
+    <line x1="10" y1="180" x2="350" y2="180" stroke="#6b8f6e" stroke-width="0.8"/>
+    <line x1="180" y1="10" x2="180" y2="350" stroke="#6b8f6e" stroke-width="0.8"/>
+    <line x1="60" y1="60" x2="300" y2="300" stroke="#6b8f6e" stroke-width="0.8"/>
+    <line x1="300" y1="60" x2="60" y2="300" stroke="#6b8f6e" stroke-width="0.8"/>
+  </svg>
+  <!-- Right side small -->
+  <svg class="shape-3" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="20" width="160" height="160" stroke="#b85c38" stroke-width="1.2" rx="4"/>
+    <rect x="50" y="50" width="100" height="100" stroke="#b85c38" stroke-width="1" rx="4"/>
+    <line x1="20" y1="20" x2="180" y2="180" stroke="#b85c38" stroke-width="0.8"/>
+    <line x1="180" y1="20" x2="20" y2="180" stroke="#b85c38" stroke-width="0.8"/>
+    <circle cx="100" cy="100" r="35" stroke="#b85c38" stroke-width="1"/>
+  </svg>
+  <!-- Left lotus -->
+  <svg class="shape-4" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="80" cy="60" rx="15" ry="40" stroke="#c8973a" stroke-width="1"/>
+    <ellipse cx="80" cy="60" rx="15" ry="40" stroke="#c8973a" stroke-width="1" transform="rotate(45 80 80)"/>
+    <ellipse cx="80" cy="60" rx="15" ry="40" stroke="#c8973a" stroke-width="1" transform="rotate(90 80 80)"/>
+    <ellipse cx="80" cy="60" rx="15" ry="40" stroke="#c8973a" stroke-width="1" transform="rotate(135 80 80)"/>
+    <circle cx="80" cy="80" r="18" stroke="#c8973a" stroke-width="1.5"/>
+    <circle cx="80" cy="80" r="8" fill="rgba(200,151,58,0.2)" stroke="#c8973a" stroke-width="1"/>
+  </svg>
+</div>
+
+<div class="watermark">UHV</div>
+
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="college-header">
+    <div class="logo-row">
+      <div class="logo-icon">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <path d="M15 3L3 11v16h24V11L15 3z" stroke="#c8973a" stroke-width="1.5" fill="none"/>
+          <rect x="11" y="17" width="8" height="10" stroke="#c8973a" stroke-width="1.2" fill="none"/>
+          <path d="M10 11h10M10 14h10" stroke="#c8973a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div>
+        <div class="college-name">Purnea College of Engineering</div>
+        <div class="college-sub">Purnea – 854303 &nbsp;|&nbsp; Dept. of Science & Technology, Govt. of Bihar</div>
+      </div>
+    </div>
+    <div class="assignment-title">Assignment: Universal Human Values</div>
+    <div class="meta-row">
+      <span><strong>Course Code:</strong> 104306</span>
+      <span><strong>Semester:</strong> 3rd (2024–2028)</span>
+      <span><strong>Branch:</strong> ECE</span>
+    </div>
+  </header>
+
+  <!-- ── COURSE OUTCOMES ── -->
+  <div class="co-box">
+    <h3>Course Outcomes (COs)</h3>
+    <ol>
+      <li>Explain basic human aspirations and process of value education clearly.</li>
+      <li>Distinguish needs of self and body for harmonious living.</li>
+      <li>Analyze harmony in family, society, and human relationships.</li>
+      <li>Interpret interconnectedness and harmony across nature and existence.</li>
+      <li>Apply human values and ethics in professional and social life.</li>
+    </ol>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       UNIT I
+  ════════════════════════════════════════ -->
+  <div class="unit-section">
+    <div class="unit-header">
+      <span class="unit-badge">Unit – I</span>
+      <span class="unit-title">Introduction to Value Education</span>
+      <span class="unit-line"></span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">1</span>
+        What are Human Values? Explain their importance with suitable examples.
+        <span class="co-tag">CO1</span>
+      </div>
+      <div class="answer">
+        <div class="def-box">
+          <strong>Human Values</strong> are the principles, beliefs, and standards that guide human behaviour towards what is good, right, and meaningful. They reflect what we consider important in life — such as honesty, compassion, respect, and responsibility.
+        </div>
+        <p><strong>Examples of Human Values:</strong></p>
+        <ul>
+          <li><strong>Honesty:</strong> A student who returns found money rather than keeping it demonstrates integrity.</li>
+          <li><strong>Compassion:</strong> A doctor who treats a poor patient free of charge shows empathy and care.</li>
+          <li><strong>Respect:</strong> Listening to elders without interrupting reflects cultural and personal respect.</li>
+          <li><strong>Responsibility:</strong> An engineer ensuring the safety of a bridge before handing it over upholds professional values.</li>
+        </ul>
+        <p><strong>Importance of Human Values:</strong></p>
+        <ul>
+          <li>They provide a foundation for ethical decision-making in personal and professional life.</li>
+          <li>They foster trust, cooperation, and peaceful coexistence in society.</li>
+          <li>They help individuals find meaning, purpose, and lasting happiness.</li>
+          <li>In a professional context (e.g., engineering), values such as accountability and safety prevent harm to society.</li>
+        </ul>
+        <p>Without human values, technological progress may lead to exploitation rather than welfare. Hence, value education is inseparable from technical education.</p>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">2</span>
+        Explain the aspirations of human beings with relevant examples.
+        <span class="co-tag">CO1</span>
+      </div>
+      <div class="answer">
+        <p>Human aspirations refer to the deep desires that every individual seeks to fulfil in life. According to the framework of Universal Human Values, all human beings fundamentally aspire for two things:</p>
+        <ul>
+          <li><strong>Happiness (Sukh):</strong> A state of inner harmony and contentment that is not dependent on external objects.</li>
+          <li><strong>Prosperity (Samridhi):</strong> The feeling of having more than enough — being able to fulfil one's own needs and contribute to others.</li>
+        </ul>
+        <p><strong>Broader Aspirations Include:</strong></p>
+        <ul>
+          <li><strong>Right Understanding:</strong> A person studying engineering aspires not just for a degree but for genuine knowledge that helps society.</li>
+          <li><strong>Meaningful Relationships:</strong> We all seek love, trust, and respect in our families and friendships.</li>
+          <li><strong>Physical Facility:</strong> A farmer aspires for sufficient food, shelter, and resources for the family — this is prosperity.</li>
+          <li><strong>Continuity of Happiness:</strong> Unlike momentary pleasure (e.g., eating tasty food), humans aspire for a continuous sense of well-being — such as a life lived with purpose.</li>
+        </ul>
+        <p>Thus, human aspirations go far beyond material desires. They include emotional fulfilment, harmonious relationships, and a sense of belonging to a larger universal order.</p>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">3</span>
+        Define happiness and prosperity. Differentiate between them with examples.
+        <span class="co-tag">CO1</span>
+      </div>
+      <div class="answer">
+        <p><strong>Happiness (Sukh)</strong> is the state of harmony within the Self (I). It is an internal condition — a sense of rightness, peace, and contentment arising from correct understanding and right relationships. It is <em>continuous</em> in nature.</p>
+        <p><strong>Prosperity (Samridhi)</strong> is the feeling of having more physical resources than required for one's own needs. It is an <em>external</em> condition relating to material wealth and physical facilities.</p>
+
+        <table class="comparison-table">
+          <tr>
+            <th>Basis</th>
+            <th>Happiness</th>
+            <th>Prosperity</th>
+          </tr>
+          <tr>
+            <td>Nature</td>
+            <td>Internal / psychological</td>
+            <td>External / material</td>
+          </tr>
+          <tr>
+            <td>Source</td>
+            <td>Right understanding &amp; relationships</td>
+            <td>Physical wealth &amp; resources</td>
+          </tr>
+          <tr>
+            <td>Duration</td>
+            <td>Continuous (not fleeting)</td>
+            <td>Can vary with circumstances</td>
+          </tr>
+          <tr>
+            <td>Example</td>
+            <td>A teacher who finds deep satisfaction in a student's success</td>
+            <td>A farmer with surplus grain to feed family &amp; community</td>
+          </tr>
+          <tr>
+            <td>Dependence</td>
+            <td>Independent of objects</td>
+            <td>Dependent on physical availability</td>
+          </tr>
+        </table>
+
+        <p><strong>Key insight:</strong> Prosperity without happiness leads to anxiety (e.g., a rich but stressed businessman). Happiness without prosperity leads to struggle. Both are needed for a complete human life, but happiness is the higher goal.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════
+       UNIT II
+  ════════════════════════════════════════ -->
+  <div class="unit-section">
+    <div class="unit-header">
+      <span class="unit-badge">Unit – II</span>
+      <span class="unit-title">Harmony in Human Being</span>
+      <span class="unit-line"></span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">1</span>
+        Discuss the coexistence of Self (I) and Body in a human being.
+        <span class="co-tag">CO2</span>
+      </div>
+      <div class="answer">
+        <p>A human being is a co-existence of two fundamentally different entities: the <strong>Self (I)</strong> and the <strong>Body</strong>.</p>
+        <ul>
+          <li><strong>Body (Sharir):</strong> It is the material, physical component — composed of cells, organs, and systems. It is made of physical matter and follows biological laws. The body is the instrument through which the Self interacts with the world.</li>
+          <li><strong>Self (I / Jeevan):</strong> It is the conscious, sentient entity within the body. It is responsible for activities like desiring, thinking, imagining, feeling, and understanding. The Self is non-material in nature.</li>
+        </ul>
+        <p><strong>Coexistence:</strong> The two are distinct yet inseparably linked during a human lifetime. The Self <em>uses</em> the body as a tool or instrument. For example:</p>
+        <ul>
+          <li>When you feel hungry — it is the body's need. But when you choose what to eat based on values (e.g., vegetarianism) — that is the Self's decision.</li>
+          <li>A person may be physically healthy (body) yet emotionally disturbed (Self) — showing they are separate.</li>
+        </ul>
+        <p>Harmony in a human being requires that the Self correctly understands itself and guides the body — rather than the body's impulses dictating the Self's choices.</p>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">2</span>
+        Explain the needs of Self and Body. Why are Self needs continuous while Body needs are limited?
+        <span class="co-tag">CO2</span>
+      </div>
+      <div class="answer">
+        <p><strong>Needs of the Body (Physical Facility):</strong> The body requires food, clothing, shelter, and physical comfort. These needs are <em>limited and definite</em> — for instance, the body can only consume a certain amount of food in a day.</p>
+        <p><strong>Needs of the Self (Psychological/Conscious Needs):</strong></p>
+        <ul>
+          <li>Happiness (Sukh)</li>
+          <li>Peace (Shanti)</li>
+          <li>Trust (Vishwas)</li>
+          <li>Respect (Sammaan)</li>
+          <li>Love (Sneh)</li>
+        </ul>
+        <p><strong>Why Self needs are continuous:</strong> The Self is a <em>conscious entity</em> that is always active — thinking, feeling, and responding. Unlike the body which rests and has saturation points, the Self continuously seeks harmony and right understanding. You can eat food and feel full, but you can never have "too much" love or "too much" inner peace. These conscious needs are perpetual because they define the quality of living, not just survival.</p>
+        <p><strong>Why Body needs are limited:</strong> The body is a physical-chemical system that reaches saturation. Beyond a certain point, eating more causes harm, not benefit. Thus, physical needs have natural limits dictated by biology.</p>
+        <div class="def-box">
+          <em>"The body needs physical facility — which is limited. The Self needs happiness — which is continuous. Confusing the two leads to restlessness and over-consumption."</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">3</span>
+        Explain the concept of Self-Exploration. Describe its process including Natural Acceptance and Experimental Validation.
+        <span class="co-tag">CO2</span>
+      </div>
+      <div class="answer">
+        <p><strong>Self-Exploration</strong> is the process of understanding oneself — discovering what is naturally acceptable to the Self, and then verifying it in one's own experience. It is the foundation of value education, as it shifts the source of knowledge from external authority to internal verification.</p>
+        <p><strong>The Process:</strong></p>
+        <ol>
+          <li>
+            <strong>Natural Acceptance (Sahaj Sveekriti):</strong> This is the intrinsic sense of what feels right — irrespective of what society, family, or education has conditioned us to believe. For example, if asked "Do you want to be deceived?", the natural answer is universally <em>No</em>. This natural acceptance is the same in all humans and is the starting point of self-exploration.
+          </li>
+          <li>
+            <strong>Proposal (Anumaan):</strong> A hypothesis or value proposition is placed before the Self. For example: <em>"Trust is the basis of a healthy relationship."</em>
+          </li>
+          <li>
+            <strong>Experimental Validation (Anubhav-Praamanikta):</strong> The proposal is tested in one's actual life and behaviour. Does living with trust actually lead to harmony? If real-life experience confirms the proposal, it becomes part of one's value system.
+          </li>
+        </ol>
+        <p><strong>Example:</strong> A student proposes that "helping classmates leads to mutual happiness." If, after genuinely helping others, they find both parties feel more fulfilled and connected, the proposal is validated — and honesty and cooperation become self-realized values.</p>
+        <p>Self-exploration thus empowers individuals to become the authors of their own value systems, based on reason and lived experience, not blind belief.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════
+       UNIT III
+  ════════════════════════════════════════ -->
+  <div class="unit-section">
+    <div class="unit-header">
+      <span class="unit-badge">Unit – III</span>
+      <span class="unit-title">Harmony in Family and Society</span>
+      <span class="unit-line"></span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">1</span>
+        Explain harmony in the family as the basic unit of human interaction.
+        <span class="co-tag">CO3</span>
+      </div>
+      <div class="answer">
+        <p>The <strong>family</strong> is the fundamental unit of society and the primary space where human values are practiced and transmitted. Harmony in the family means that all members relate to each other with proper understanding and right feelings — creating an environment of mutual fulfilment.</p>
+        <p><strong>Foundation of Family Harmony:</strong></p>
+        <ul>
+          <li><strong>Right Feelings (Bhaav):</strong> Relationships must be built on feelings such as love, care, guidance, and respect — rather than utility or compulsion.</li>
+          <li><strong>Right Understanding (Samajh):</strong> Each member understands their role and responsibility — e.g., parents as nurturers, children as learners, spouses as companions.</li>
+          <li><strong>Values in Practice:</strong> Trust, respect, affection, care, and guidance are practised daily — e.g., a parent listening patiently to a child's fears.</li>
+        </ul>
+        <p><strong>Family as Training Ground:</strong> The family is where we first learn to trust, cooperate, resolve conflict, and express love. These skills then extend outward to society. A family in harmony produces individuals who are emotionally secure and socially responsible.</p>
+        <p><strong>Example:</strong> In a family where parents make decisions transparently and children are listened to, a culture of respect and trust develops — which the children carry into their schools, workplaces, and eventually their own families.</p>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">2</span>
+        Discuss trust as the foundational value in relationships with suitable examples.
+        <span class="co-tag">CO3</span>
+      </div>
+      <div class="answer">
+        <div class="def-box">
+          <strong>Trust (Vishwas)</strong> is the assurance that the other person wants my happiness and well-being — and will not intentionally harm me. It is the most fundamental value in any relationship.
+        </div>
+        <p><strong>Why Trust is Foundational:</strong> All other values in a relationship — love, respect, care, and cooperation — can only exist when trust is present. Without trust, even apparent acts of love feel suspicious or conditional.</p>
+        <p><strong>Examples:</strong></p>
+        <ul>
+          <li><strong>Doctor–Patient:</strong> A patient trusts the doctor to prescribe medicine for their health, not for commercial gain. This trust allows the healing relationship to function.</li>
+          <li><strong>Engineer–Public:</strong> Citizens trust that a civil engineer has followed safety codes when designing a bridge. This social trust enables public infrastructure to function.</li>
+          <li><strong>Parent–Child:</strong> When a child trusts that parents will support them through failure, they take healthy risks and grow.</li>
+          <li><strong>Teacher–Student:</strong> A student who trusts the teacher's intent learns more openly, even accepting correction without feeling attacked.</li>
+        </ul>
+        <p><strong>Violation of Trust:</strong> If a doctor over-prescribes for commission, or an engineer cuts corners on safety, the foundational trust of the relationship is broken — and this damage often extends to entire institutions.</p>
+        <p>Hence, in Universal Human Values, developing trustworthy character is considered a prerequisite for harmonious professional and personal life.</p>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-block">
+      <div class="question">
+        <span class="q-num">3</span>
+        Explain the concept of universal human order.
+        <span class="co-tag">CO4</span>
+      </div>
+      <div class="answer">
+        <p>The <strong>Universal Human Order</strong> refers to a vision of a world in which all human beings — across all families, societies, and nations — live in a state of mutual harmony, prosperity, and co-existence. It represents the natural, ideal state of human existence when values are rightly understood and practised.</p>
+        <p><strong>The Four Levels of Human Order:</strong></p>
+        <ol>
+          <li><strong>Individual:</strong> Self-exploration and right understanding within the person — inner harmony.</li>
+          <li><strong>Family:</strong> Values of trust, care, and love practised in the family unit.</li>
+          <li><strong>Society:</strong> Mutual respect and justice in social interactions — equal concern for all, not just one's own group.</li>
+          <li><strong>Nature / Existence:</strong> Co-existence of humans with nature — sustainable living that respects the natural order of plants, animals, and the environment.</li>
+        </ol>
+        <p><strong>Characteristics of Universal Human Order:</strong></p>
+        <ul>
+          <li>Every human being is seen as equally important (human-centricity is replaced by existence-centricity).</li>
+          <li>Physical resources are used in accordance with need, not greed.</li>
+          <li>Relationships are guided by values, not power or fear.</li>
+          <li>There is mutual fulfilment — not at the cost of others but in consonance with others.</li>
+        </ul>
+        <p><strong>Example:</strong> In a universal human order, a developed nation would assist developing ones — not for political leverage, but out of genuine care for all human beings. Similarly, industries would adopt eco-friendly processes because of a felt sense of responsibility toward nature, not merely due to legal compulsion.</p>
+        <p>The universal human order is not a utopian fantasy but a natural outcome when enough individuals and families live by right understanding and values. It begins with each person choosing to live ethically and harmoniously.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <p>Submitted to: <strong>Dr. Md. Shahbaz Akhtar</strong> &nbsp;|&nbsp; Course: Universal Human Values (104306)</p>
+    <p style="margin-top:4px; opacity:0.6;">Purnea College of Engineering &nbsp;·&nbsp; ECE Semester III &nbsp;·&nbsp; Session 2024–2028</p>
+  </div>
+
+</div>
+</body>
+</html>
